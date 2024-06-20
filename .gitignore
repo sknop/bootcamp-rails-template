@@ -30,3 +30,5 @@ buildNumber.properties
 ### Mac OS ###
 .DS_Store
 /.idea/
+/.envrc
+/src/main/avro/
