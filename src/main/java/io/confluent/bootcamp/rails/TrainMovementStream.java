@@ -1,11 +1,14 @@
 package io.confluent.bootcamp.rails;
 
+import io.confluent.bootcamp.rails.common.AbstractBase;
 import io.confluent.bootcamp.rails.common.SerdeGenerator;
 import org.apache.kafka.common.serialization.Serdes;
 import org.apache.kafka.streams.StreamsBuilder;
 import io.confluent.bootcamp.rails.schema.*;
 import org.apache.kafka.streams.kstream.Consumed;
 import org.apache.kafka.streams.kstream.KStream;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import picocli.CommandLine;
 
 import java.util.Properties;
@@ -14,6 +17,7 @@ import java.util.Properties;
         version = "TrainMovementStream 1.0",
         description = "Reads Train_Movements objects in Avro format from a stream.")
 public class TrainMovementStream extends AbstractStream {
+    protected static Logger logger = LoggerFactory.getLogger(TrainMovementStream.class.getName());
     private final String TRAIN_MOVEMENTS_TOPIC = "TRAIN_MOVEMENTS";
 
     @CommandLine.Option(names = {"--topic"},
@@ -45,7 +49,7 @@ public class TrainMovementStream extends AbstractStream {
         try {
             new CommandLine(new TrainMovementStream()).execute(args);
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.error("Something went wrong", e);
             System.exit(1);
         }
     }

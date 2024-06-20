@@ -6,7 +6,8 @@ import picocli.CommandLine;
 
 import java.io.*;
 import java.util.Properties;
-import java.util.logging.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import java.util.stream.Collectors;
 
 @CommandLine.Command(
@@ -20,7 +21,7 @@ import java.util.stream.Collectors;
 abstract public class AbstractBase {
     protected static final String DEFAULT_BOOTSTRAP_SERVERS = "localhost:9092";
     protected static final String DEFAULT_SCHEMA_REGISTRY =  "http://localhost:8081";
-    protected Logger logger = Logger.getLogger(AbstractBase.class.getName());
+    protected Logger logger = LoggerFactory.getLogger(AbstractBase.class.getName());
 
     protected Properties properties = new Properties();
 
@@ -34,7 +35,7 @@ abstract public class AbstractBase {
 
     public void readConfigFile(Properties properties) {
         if (configFile != null) {
-            logger.info("Reading config file " + configFile);
+            logger.info("Reading config file {}", configFile);
 
             try (InputStream inputStream = new FileInputStream(configFile)) {
                 Reader reader = new InputStreamReader(inputStream);
@@ -45,15 +46,14 @@ abstract public class AbstractBase {
                             .map(e -> e.getKey() + " : " + e.getValue())
                             .collect(Collectors.joining(", ")));
             } catch (FileNotFoundException e) {
-                e.printStackTrace();
-                logger.severe("Inputfile " + configFile + " not found");
+                logger.error("Input file {} not found", configFile, e);
                 System.exit(1);
             } catch (IOException e) {
-                e.printStackTrace();
+                logger.error("Error reading config file {}", configFile, e);
             }
         }
         else {
-            logger.warning("No config file specified");
+            logger.warn("No config file specified");
         }
     }
 
@@ -74,7 +74,7 @@ abstract public class AbstractBase {
         }
     }
 
-    protected void addProperties(Properties properties) {
+    protected void addProperties(Properties ignoredProperties) {
         // empty
     }
 }

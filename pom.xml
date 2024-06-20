@@ -202,8 +202,10 @@
                 <version>${confluent.version}</version>
                 <configuration>
                     <schemaRegistryUrls>
+                        <!--suppress UnresolvedMavenProperty -->
                         <param>${env.SCHEMA_REGISTRY_URLS}</param>
                     </schemaRegistryUrls>
+                    <!--suppress UnresolvedMavenProperty -->
                     <userInfoConfig>${env.USER_INFO_CONFIG}</userInfoConfig>
                     <outputDirectory>src/main/avro</outputDirectory>
                     <subjectPatterns>
