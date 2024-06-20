@@ -1,6 +1,5 @@
 package io.confluent.bootcamp.rails;
 
-import io.confluent.bootcamp.rails.common.AbstractBase;
 import io.confluent.bootcamp.rails.common.SerdeGenerator;
 import org.apache.kafka.common.serialization.Serdes;
 import org.apache.kafka.streams.StreamsBuilder;
