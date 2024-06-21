@@ -210,6 +210,11 @@
                     <outputDirectory>src/main/avro</outputDirectory>
                     <subjectPatterns>
                         <param>^TRAIN_.*-value$</param>
+                        <param>NETWORKRAIL_TRAIN_MVT-value</param>
+                        <param>TD_ALL_SIG_AREA-value</param>
+                        <param>LOCATIONS_RAW-value</param>
+                        <param>CANX_REASON_CODE-value</param>
+                        <param>TOC_CODES-value</param>
                     </subjectPatterns>
                     <compatibilityLevels/>
                     <messagePath/>
