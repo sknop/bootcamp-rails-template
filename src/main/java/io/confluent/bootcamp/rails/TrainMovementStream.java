@@ -44,7 +44,7 @@ public class TrainMovementStream extends AbstractStream {
         return "train-movements-stream";
     }
 
-    public static void main(String[] args) {
+    static void main(String[] args) {
         try {
             new CommandLine(new TrainMovementStream()).execute(args);
         } catch (Exception e) {
