@@ -33,6 +33,7 @@ public abstract class AbstractStream extends AbstractBase implements Callable<In
         properties.put(StreamsConfig.BOOTSTRAP_SERVERS_CONFIG, DEFAULT_BOOTSTRAP_SERVERS);
         properties.put(KafkaAvroSerializerConfig.SCHEMA_REGISTRY_URL_CONFIG, DEFAULT_SCHEMA_REGISTRY);
         properties.put(StreamsConfig.APPLICATION_ID_CONFIG, getApplicationName());
+        properties.put(ConsumerConfig.AUTO_OFFSET_RESET_CONFIG, "earliest");
 
         readConfigFile(properties);
 
@@ -43,7 +44,6 @@ public abstract class AbstractStream extends AbstractBase implements Callable<In
             properties.put(KafkaAvroSerializerConfig.SCHEMA_REGISTRY_URL_CONFIG, schemaRegistryURL);
         }
 
-        properties.put(ConsumerConfig.AUTO_OFFSET_RESET_CONFIG, "earliest");
         if (stateDir != null) {
             properties.put(StreamsConfig.STATE_DIR_CONFIG, stateDir);
         }

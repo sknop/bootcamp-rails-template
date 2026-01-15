@@ -3,7 +3,7 @@ package io.confluent.bootcamp.rails;
 import io.confluent.bootcamp.rails.common.SerdeGenerator;
 import org.apache.kafka.common.serialization.Serdes;
 import org.apache.kafka.streams.StreamsBuilder;
-import io.confluent.bootcamp.rails.schema.*;
+import org.apache.flink.avro.generated.record.*;
 import org.apache.kafka.streams.kstream.Consumed;
 import org.apache.kafka.streams.kstream.KStream;
 import org.slf4j.Logger;
@@ -26,7 +26,7 @@ public class TrainMovementStream extends AbstractStream {
 
     @Override
     protected void createTopology(StreamsBuilder builder) {
-        KStream<String, TrainMovements> trainMovements =
+        KStream<String, TRAIN_MOVEMENTS_value> trainMovements =
                 builder.stream(trainMovementsTopic, Consumed.with(Serdes.String(), SerdeGenerator.getSerde(properties)));
 
         if (verbose) {
