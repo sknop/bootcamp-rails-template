@@ -15,7 +15,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import picocli.CommandLine;
 
-import java.util.Optional;
 import java.util.Properties;
 
 @CommandLine.Command(name = "NetworkRailTrainMVTStream",
@@ -37,7 +36,7 @@ public class NetworkRailTrainMVTStream extends AbstractStream {
 
         if (verbose) {
             ObjectMapper mapper = new ObjectMapper();
-            trainMovements.foreach((key, value) -> {
+            trainMovements.foreach((_, value) -> {
                 var text = value.getText();
 
                 try {
