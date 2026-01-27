@@ -13,7 +13,6 @@ import org.apache.kafka.streams.kstream.KStream;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import picocli.CommandLine;
-import sun.misc.Signal;
 
 import java.io.IOException;
 import java.util.Map;
