@@ -19,7 +19,6 @@ import java.io.IOException;
 import java.time.Duration;
 import java.util.Properties;
 import java.util.concurrent.Callable;
-import java.util.concurrent.CountDownLatch;
 
 public abstract class AbstractStream extends AbstractBase implements Callable<Integer> {
     @CommandLine.Option(names = {"-v", "--verbose"},
@@ -125,5 +124,5 @@ public abstract class AbstractStream extends AbstractBase implements Callable<In
 
     protected abstract String getApplicationName();
 
-    protected void reportResults() { };
+    protected void reportResults() { }
 }

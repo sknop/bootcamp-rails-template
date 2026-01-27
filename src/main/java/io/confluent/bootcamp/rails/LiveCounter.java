@@ -17,7 +17,7 @@ public class LiveCounter {
     private static final AtomicLong counter = new AtomicLong(0);
     private static final AtomicLong other = new AtomicLong(100);
 
-    public static void main(String[] args) throws Exception {
+    static void main() throws Exception {
         DefaultTerminalFactory factory = new DefaultTerminalFactory();
         factory.setUnixTerminalCtrlCBehaviour(UnixLikeTerminal.CtrlCBehaviour.CTRL_C_KILLS_APPLICATION);
 

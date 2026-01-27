@@ -1,14 +1,8 @@
 package io.confluent.bootcamp.rails;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.JsonNodeType;
-import com.googlecode.lanterna.graphics.TextGraphics;
-import com.googlecode.lanterna.screen.Screen;
-import com.googlecode.lanterna.screen.TerminalScreen;
-import com.googlecode.lanterna.terminal.DefaultTerminalFactory;
-import com.googlecode.lanterna.terminal.Terminal;
 import io.confluent.bootcamp.rails.common.SerdeGenerator;
 import io.confluent.bootcamp.rails.networkrail.Header;
 import io.confluent.bootcamp.rails.schema.NetworkRailMovement;
@@ -40,7 +34,7 @@ public class NetworkRailTrainMVTStream extends AbstractStream {
     private String trainMovementsTopic;
 
     @Override
-    protected void createTopology(StreamsBuilder builder) throws IOException {
+    protected void createTopology(StreamsBuilder builder) {
         KStream<String, NetworkRailMovement> trainMovements =
                 builder.stream(trainMovementsTopic, Consumed.with(Serdes.String(), SerdeGenerator.getSerde(properties)));
 
@@ -75,7 +69,6 @@ public class NetworkRailTrainMVTStream extends AbstractStream {
                             default ->  String.format("UNKNOWN %4s   :", msgType);
                         };
                         incrementCounter(msgTypeCount, msgType);
-                        // System.out.printf("%s header = %s  body = %s\n", prefix, h, body);
 
                         screen.pollInput();
 
@@ -121,21 +114,6 @@ public class NetworkRailTrainMVTStream extends AbstractStream {
     }
 
     static void main(String[] args) {
-
-        // Handle SIGINT manually since Lanterna blocks it
-        Signal.handle(new Signal("INT"), signal -> {
-            System.out.println("\n🛑 Caught Ctrl+C");
-
-            System.exit(0);
-        });
-
-        Signal.handle(new Signal("TERM"), signal -> {
-            System.out.println("\n🛑 Caught SIGTERM");
-
-            System.exit(0);
-        });
-
-
         try {
             NetworkRailTrainMVTStream app = new NetworkRailTrainMVTStream();
             new CommandLine(app).execute(args);
